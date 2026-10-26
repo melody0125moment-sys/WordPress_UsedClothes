@@ -1,0 +1,88 @@
+<?php
+/*
+Template Name: CONTACTページ
+*/
+get_header();
+?>
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ | THRIFT</title>
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/style.css">
+    <!-- ★スマホ用の別CSS（768px以下でのみ読み込まれる） -->
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/sp.css" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+   <!-- 共通ヘッダー読み込みエリア -->
+    <?php get_header(); ?>
+
+    <main class="info-page-section contact-page">
+        <div class="info-page-container">
+
+            <!-- ページタイトル -->
+            <div class="contact-header">
+                <h1 class="contact-title">お問い合わせ</h1>
+            </div>
+
+            <!-- メインコンテンツエリア -->
+            <div class="contact-content">
+                <p class="contact-lead">
+                    THRIFTへのお問い合わせ・在庫の確認は、<br class="sp-br">公式LINEにて承っております。<br>
+                    商品の在庫状況、店舗へのアクセス、<br class="sp-br">採用についてなど、気になる点がございましたら<br class="sp-br">お気軽にご連絡ください。
+                </p>
+
+                <!-- FAQへの案内ブロック -->
+                <div class="contact-block">
+                    <h2 class="contact-subheading">■ お問い合わせの前に</h2>
+                    <p class="contact-text">
+                        お客様からよくいただくご質問につきましては、<br class="sp-br">「よくある質問（FAQ）」にまとめております。<br>
+                        お問い合わせいただく前に、ぜひ一度ご確認ください。
+                    </p>
+                    <a href="<?php echo esc_url( home_url('/faq/') ); ?>" class="contact-link">よくある質問（FAQ）はこちら</a>
+                </div>
+
+                <!-- LINE問い合わせブロック -->
+                <div class="contact-block">
+                    <h2 class="contact-subheading">■ 公式LINEでお問い合わせ</h2>
+                    <p class="contact-text">
+                        下記のボタンより「THRIFT公式LINE」をお友達追加のうえ、トーク画面よりメッセージをお送りください。
+                    </p>
+                    <ul class="contact-list">
+                        <li>ご対応時間：11:00 － 19:00（営業時間内）</li>
+                        <li>ご返信について：接客中や営業時間外のお問い合わせにつきましては、翌営業日以降に順次お返事させていただきます。<br class="pc-br">あらかじめご了承ください。</li>
+                    </ul>
+
+                    <!-- LINEボタン（クリックでLINE公式アカウントへ） -->
+                    <div class="contact-btn-wrapper">
+                        <a href="<?php echo esc_url( home_url('/line/') ); ?>" target="_blank" rel="noopener noreferrer" class="contact-line-btn">
+                            LINEでお問い合わせする（公式LINEを開く）
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="back-link"><br>
+                <a href="<?php echo esc_url( home_url('/') ); ?>">← トップページに戻る</a>
+            </div>
+        </div>
+    </main>
+    <!-- ページトップへ戻るボタン -->
+    <a href="#" class="page-top-btn">↑ ページ上部に戻る</a>
+
+    <!-- フッターを読み込むための場所 -->
+    <?php get_footer(); ?>
+
+    <!-- 共通スクリプト -->
+    <script src="<?php echo get_template_directory_uri(); ?>/script.js"></script>
+
+</body>
+
+</html>

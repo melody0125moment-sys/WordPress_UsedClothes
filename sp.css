@@ -1,0 +1,718 @@
+body {
+    padding-top: 57px;
+    /* 固定ヘッダーの高さ分を常に確保する */
+}
+
+/* スマホのときだけ適用する（画面幅768px以下） */
+.hero {
+    height: 60vh;
+}
+
+.hero-title {
+    font-size: 40px;
+}
+
+/* ヘッダーのロゴ大きさ調整 */
+.logo a {
+    font-size: 18px;
+    /* PC用の24pxからスマホ用に小さくスッキリさせる */
+    letter-spacing: 1.5px;
+    /* 文字間隔も少しだけ詰める */
+}
+
+.back-link {
+    margin-bottom: 20px;
+    /* ★「トップページに戻る」の下にしっかり余白を空ける */
+}
+
+.back-link a {
+    font-size: 10px;
+    /* ★文字サイズを小さく控えめにする（お好みで12px〜14pxに調整） */
+}
+
+/* メニュー設定 */
+
+.global-menu {
+    width: 100%;
+    /* スマホでは横幅いっぱいに広げる */
+    right: -100%;
+
+    /* ★追加：下の隙間を埋めるための設定（min-heightなら上のナビバーを隠しません！） */
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: #1a1936;
+    /* 背景の紺色をしっかり敷き詰める */
+}
+
+.global-menu.active {
+    right: 0;
+}
+/* メニュー開いてるときはページ上部に戻るボタンを表示しない */
+body:has(.global-menu.active) .page-top-btn {
+    display: none !important;
+}
+
+/* ヒーローセクション */
+
+.hero {
+    height: 25vh;
+    /* スマホでは高さを少し抑えてスッキリ見せる（60vh〜70vhくらいがおすすめ） */
+}
+
+/* THRIFT タイトルをスマホ用に縮小 */
+.hero-title {
+    font-size: 38px;
+    /* 64pxからスマホ用に小さく調整 */
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+/* キャッチコピーも少し調整 */
+.hero-subtitle {
+    font-size: 14px;
+    /* 20pxから小さく調整 */
+    letter-spacing: 1px;
+    line-height: 1.6;
+}
+
+
+/* お知らせセクション */
+
+
+/* お知らせのグレーボックス部分 */
+.news-box,
+.info-box,
+.news-container {
+    width: 95%;
+    /* 画面幅に対して少し余裕を持たせる（例: 90%や88%など） */
+    max-width: 360px;
+    /* 広がりすぎないように最大幅を制限 */
+    margin: 0 auto;
+    /* 左右中央に配置 */
+}
+
+
+/* コンセプトバナー */
+
+/* バナーの高さを少し縮める（PCの300pxから調整） */
+.concept-banner-link {
+    height: 100px;
+    /* お好みで 180px 〜 220px くらいに調整可能 */
+}
+
+/* 「THRIFTについて」の文字サイズを小さくする */
+.concept-banner-title {
+    font-size: 22px;
+    /* 32pxからスマホ用にスッキリサイズへ調整 */
+    letter-spacing: 2px;
+}
+
+/* コンセプトバナーの上下の隙間を狭める */
+.concept-banner {
+    padding-top: 30px;
+    /* 上（お知らせとの間）を狭める */
+    padding-bottom: 30px;
+    /* 下（ピックアップとの間）を狭める */
+}
+
+/* ピックアップ */
+/* 1. グリッドの並びを解除して、横一列（flex）＆スクロール可能にする */
+.pickup-grid {
+    display: flex;
+    grid-template-columns: none;
+    /* PC用の4列設定をリセット */
+    overflow-x: auto;
+    /* 横スクロールを有効にする */
+    scroll-snap-type: x mandatory;
+    /* スクロールしたときに位置がピタッと止まる */
+    gap: 15px;
+    /* カード同士の間隔 */
+    padding-bottom: 15px;
+    /* スクロールバーとの余白 */
+    margin-bottom: 20px;
+
+    /* スマホ画面の端までスクロールできるようにするための隠し技 */
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 20px;
+    /* 右側だけ次のカードをチラ見せするための余白を残す */
+
+    scrollbar-width: none;
+}
+
+/* Chrome / Safari用のスクロールバー非表示 */
+.pickup-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* 2. 各カードの幅を指定して、「2個＋3個目がチラ見え」するようにする */
+.pickup-card {
+    flex: 0 0 45%;
+    /* 画面幅に対して「75%」のサイズ（これで3つ目がいい感じに途切れる） */
+    max-width: 240px;
+    /* 大きくなりすぎないように制限 */
+    scroll-snap-align: start;
+    /* スクロール時のスナップ位置 */
+}
+
+
+/* 新着入荷商品セクション */
+
+/* 1. PC用の5列グリッドを解除して、横一列＆スクロール可能にする */
+.products-grid {
+    display: flex;
+    grid-template-columns: none;
+    /* PC用の設定をリセット */
+    overflow-x: auto;
+    /* 横スクロール有効 */
+    scroll-snap-type: x mandatory;
+    /* ピタッと止まるスナップ機能 */
+    gap: 15px;
+    /* カード同士の間隔 */
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+    /* Firefox用スクロールバー非表示 */
+}
+
+.products-grid::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari用スクロールバー非表示 */
+}
+
+/* 2. 各商品カードの幅をピックアップと同様に「45%（2個＋3個目チラ見え）」に設定 */
+.product-card {
+    flex: 0 0 40%;
+    /* 画面に対して45%の幅（2個並んで3個目が半分切れる） */
+    max-width: 180px;
+    /* 大きくなりすぎないように制限 */
+    scroll-snap-align: start;
+}
+
+/* スマホでも3つ横並びをキープする */
+.info-banners-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3列を維持 */
+    gap: 8px;
+    /* スマホなので隙間を少し狭くすっきりさせる */
+    padding: 0 10px;
+    /* 画面の端に少し余白を持たせる */
+}
+
+/* バナーの高さを縦長（お好みのバランス）にする */
+.info-banner-link {
+    height: 170px;
+    /* 縦長の比率に合わせて高さを調整 */
+    border-radius: 2px;
+    overflow: hidden;
+    /* 拡大したときに枠からはみ出た部分を隠す */
+    /* ズームのなめらかさ */
+    transition: transform 0.4s ease;
+}
+
+/* バナーの文字ベース設定 */
+.info-banner-text {
+    font-size: 11px;
+    /* スマホ幅に合わせて文字をコンパクトに */
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* すべてのバナーのテキストを「左揃え」＋「左側に少し余白」にする */
+.info-banner-link .info-banner-text {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    /* すべて左揃え */
+    padding-left: 10px;
+    /* 左端から少し内側に配置 */
+
+}
+
+/* ホバー時（またはスマホでタップしたとき）にふんわりズームする */
+.info-banner-link:hover,
+.info-banner-link:active {
+    transform: scale(1.05);
+    /* 新着商品と同じ1.05倍にズーム！ */
+}
+
+.pc-br {
+    display: none;
+}
+
+/* スマホのときだけ改行タグ（<br class="sp-br">）を有効にする */
+.sp-br {
+    display: inline;
+}
+
+/* スマホで「押している間（タップ中）」にホバー演出を効かせる設定 */
+.info-banner-link:active .info-banner-overlay,
+.info-banner-link:hover .info-banner-overlay {
+    background-color: rgba(0, 0, 0, 0.25);
+    /* タップしたときにふわっと明るくなる */
+}
+
+/* SNSバナー */
+
+/* スマホ版のとき、SNSセクション全体に背景色と下の余白をしっかり持たせる */
+.sns-section {
+    background-color: #e8e8e0;
+    padding-bottom: 100px;
+    /* フッター手前の余白をここで確保する */
+}
+
+/* 1. PC用の2列グリッドを解除して、縦1列（1カラム）にする */
+.sns-container {
+    display: flex;
+    flex-direction: column;
+    /* 縦に並べる */
+    gap: 75px;
+    /* カード同士の隙間 */
+    padding: 0;
+    /* 画面の左右に綺麗な余白を持たせる */
+}
+
+/* 2. SNSカードの高さをスマホ用に最適化 */
+.sns-card {
+    width: 100%;
+    height: 150px;
+    /* スマホに合わせて少しコンパクトにする（お好みで140〜160px） */
+}
+
+/* 3. 中の半透明グレーボックスの調整 */
+.sns-box {
+    padding: 15px 16px;
+    /* スマホでも窮屈にならないよう内側余白を調整 */
+    gap: 18px;
+    /* アイコン側と文字側の隙間を少し詰める */
+}
+
+.sns-box-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* ★中央寄せを解除して「左寄せ」にする */
+    justify-content: center;
+    min-width: auto;
+    /* 固定幅をリセットして自然に左へ */
+}
+
+/* 4. アイコン周り */
+/* インスタアイコン */
+.sns-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 8px;
+}
+
+/* LINEアイコン */
+.line-icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 4px;
+}
+
+.sns-account {
+    font-size: 10px;
+    text-align: center;
+    /* アカウント名も中央でアイコンの真下に配置 */
+    width: 100%;
+}
+
+.sns-box-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    /* ★幅いっぱいに引き伸ばす */
+    padding-right: 0;
+}
+
+/* 5. テキスト周り */
+.sns-title {
+    width: 100%;
+    /* ボックスの幅に合わせて線を長く引く */
+    box-sizing: border-box;
+    font-size: 14px;
+    /* タイトル文字サイズをスマホ用に調整 */
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #564F65;
+    /* 下線 */
+    text-align: center;
+}
+
+.sns-desc {
+    font-size: 10.5px;
+    /* 説明文も読みやすい大きさに */
+    line-height: 1.4;
+}
+
+/* 6. スマホでタップしたときにふんわりズーム＆色変化する演出 */
+.sns-card {
+    transition: transform 0.3s ease;
+}
+
+.sns-card:hover,
+.sns-card:active {
+    transform: scale(1.02);
+    /* タップ時にほんのり拡大 */
+}
+
+/* フッター全体：上部の広すぎる余白をキュッとスリムにする */
+.site-footer {
+    padding: 50px 20px 20px 20px;
+    background: #1a1936;
+    /* ★スマホ版ではグラデーションを消して単色にする */
+}
+
+/* ロゴを非表示にする場合 */
+.footer-brand {
+    display: none;
+}
+
+/* 左右並びを解除して、縦並び（1カラム）にする */
+.footer-container {
+    flex-direction: column;
+    /* 縦方向に並べる */
+    align-items: center;
+    /* すべて中央揃えにする */
+    gap: 40px;
+    /* ロゴとメニューの間の隙間 */
+}
+
+/* リンクメニュー全体のブロック */
+.footer-links {
+    margin-right: 0;
+    /* ズレをリセット */
+    width: 100%;
+}
+
+/* メニューを「縦に1列」にして中央に並べる */
+.footer-menu {
+    display: flex;
+    flex-direction: column;
+    /* 縦1列にする */
+    align-items: left;
+    /* 中央揃え */
+    gap: 20px;
+    /* メニュー同士の縦の間隔 */
+}
+
+/* メニューの文字 */
+.footer-menu li a {
+    font-size: 14px;
+    /* スマホに合わせて少しスリムに */
+    letter-spacing: 1px;
+}
+
+/* コピーライトのスマホ用調整（右寄せ ＆ さらに小さく） */
+.footer-copyright {
+    font-size: 8px;
+    /* ★スマホではもっと小さくスッキリさせる */
+}
+
+/* お知らせの中身 */
+.news-detail-section {
+    padding-top: 40px !important;
+}
+
+/* スマホ画面のときに、お知らせ本文の文字や余白を調整する */
+.news-detail-container {
+    padding: 10px 20px 20px 20px;
+    /* 周りの余白を少しスッキリさせる */
+}
+
+.news-detail-container p,
+.news-detail-container li {
+    font-size: 14px;
+    /* スマホで大きすぎる場合は文字サイズを微調整 */
+}
+
+
+/* コンセプト詳細：about.html */
+.concept-banner-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* ショップコンセプトテキスト */
+.shop-concept {
+    padding: 50px 20px;
+    /* 左右に20pxのパディングを入れて画面端に文字がくっつくのを防ぐ */
+}
+
+.concept-subtitle {
+    font-size: 16px;
+    color: #443B57;
+    line-height: 1.8;
+    /* 行間を少しゆったりさせる */
+    font-weight: bold;
+}
+
+.concept-text {
+    max-width: 320px;
+    font-size: 13px;
+    /* スマホで読みやすいサイズ */
+    color: #443B57;
+    line-height: 2.2;
+    /* 行間を少し広げて読みやすくする */
+    text-align: left;
+}
+
+.shop-selection {
+    padding: 50px 20px;
+    /* 左右に20pxのパディングを入れて画面端に文字がくっつくのを防ぐ */
+}
+
+.selection-subtitle {
+    font-size: 16px;
+    color: #443B57;
+    line-height: 1.8;
+    /* 行間を少しゆったりさせる */
+    font-weight: bold;
+}
+
+.selection-text {
+    max-width: 320px;
+    font-size: 13px;
+    /* スマホで読みやすいサイズ */
+    color: #443B57;
+    line-height: 2.2;
+    /* 行間を少し広げて読みやすくする */
+    text-align: left;
+}
+
+/* ピックアップ一覧pickup.html */
+/* 1. セクション全体のパディング：上部に固定ヘッダー分の余白を開け、左右に綺麗な余白（20px）を持たせる */
+.all-pickup-section {
+    background-color: #e8e8e0;
+    padding: 30px 20px 40px 20px !important;
+    /* 上を広めにとって見切れを防止、左右に20pxの余白 */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* コンテナも幅いっぱいにしつつ安全に */
+.all-pickup-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. タイトルとボーダーのエリア：左右に少し内側に入るようパディングを設定して「線を少し短く」する */
+.all-pickup-header {
+    display: block;
+    width: 100%;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(86, 79, 101, 0.3);
+    padding-bottom: 15px;
+    padding-left: 15px;
+    /* タイトルが端から少し離れるように */
+    padding-right: 15px;
+    /* 線が両端から少し内側で止まるようにする */
+    box-sizing: border-box;
+}
+
+/* 3. 上のページネーションを下の段に落として右端（上のボーダーの右端）に綺麗に合わせる */
+.all-pickup-header .pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0;
+    font-size: 12px;
+}
+
+/* 4. 下のカード群：左右の余白をヘッダーと綺麗に合わせる */
+.all-pickup-grid {
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+/* 5. 下部のエリア（トップページへ戻る ＆ ページネーション） */
+.pickup-footer-area {
+    padding-left: 15px;
+    /* 「トップページへ戻る」を少し右へ（左にパディング） */
+    padding-right: 15px;
+    /* 右側のページネーションの位置を上の段と揃える */
+    box-sizing: border-box;
+    margin-top: 40px;
+}
+
+/* トップページに戻るリンク */
+.pickup-footer-area .back-link {
+    margin-bottom: 20px;
+}
+
+/* 下部のページネーションを右寄せにして上の段と左右差を合わせる */
+.pickup-footer-area .pagination {
+    display: flex !important;
+    justify-content: flex-end !important;
+    font-size: 12px;
+}
+
+.pickup-card a {
+    display: block;
+    /* 横並びを解除 */
+}
+
+.pickup-card .card-img {
+    width: 100%;
+    /* 画像を元の横幅いっぱいに戻す */
+    margin-bottom: 10px;
+}
+
+/* 3. スマホ用の文字サイズ調整 */
+.pickup-card .card-title {
+    font-size: 13px;
+    /* カードタイトルの文字を小さく */
+    margin-bottom: 4px;
+}
+
+.pickup-card .card-text {
+    font-size: 11px;
+    /* 説明文の文字を小さく */
+    line-height: 1.4;
+}
+
+/* ピックアップ詳細（pickup-1～5） */
+/* スマホ表示時は縦並びにする */
+.pickup-detail-section {
+    padding: 20px 30px 40px 30px;
+}
+
+.pickup-detail-content {
+    flex-direction: column;
+    gap: 25px;
+}
+
+.pickup-detail-image {
+    max-width: 100%;
+}
+
+.pickup-detail-image img {
+    /* 中央に寄せたい画像のセレクタを指定 */
+    display: block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.pickup-detail-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* 新着商品一覧　new-arrivals.html*/
+.all-arrivals-section {
+    background-color: #e8e8e0;
+    padding: 30px 20px 40px 20px !important;
+    /* 上を広めにとって見切れを防止、左右に20pxの余白 */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* コンテナも幅いっぱいにしつつ安全に */
+.all-arrivals-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. タイトルとボーダーのエリア：左右に少し内側に入るようパディングを設定して「線を少し短く」する */
+.all-arrivals-header {
+    display: block;
+    width: 100%;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(86, 79, 101, 0.3);
+    padding-bottom: 15px;
+    padding-left: 20px;
+    /* タイトルが端から少し離れるように */
+    padding-right: 20px;
+    /* 線が両端から少し内側で止まるようにする */
+    box-sizing: border-box;
+}
+
+/* 3. 上のページネーションを下の段に落として右端（上のボーダーの右端）に綺麗に合わせる */
+.all-arrivals-header .pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0;
+    font-size: 12px;
+}
+
+
+.all-arrivals-section .products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2列に並べる */
+    overflow-x: visible;
+    /* 横スクロールを解除 */
+    scroll-snap-type: none;
+    /* スナップを解除 */
+    gap: 12px;
+    /* カード同士の間隔 */
+}
+
+/* 各カードの幅制限（横スクロール用設定）をリセット */
+.all-arrivals-section .product-card {
+    flex: unset;
+    width: 100%;
+    max-width: none;
+}
+
+/* 商品ご購入・ご案内 */
+
+/* 1. ページ全体のパディング調整（上部の余白を狭め、左右に余裕を持たせる） */
+.info-page-section {
+    padding: 30px 20px 40px;
+    /* 上を20pxに狭め、左右に20pxのパディングを確保 */
+}
+
+.info-page-container {
+    padding: 0 10px;
+    /* さらに内側のコンテンツ幅を狭めてスッキリさせる */
+}
+
+/* 2. バナーの文字をしっかり中央に持ってくる */
+
+/* ご案内ページのバナーだけ、左揃えと左パディングをリセットして中央に戻す */
+.info-page-section .info-banner-link .info-banner-text {
+    text-align: center;
+    padding-left: 0;
+    font-size: 18px;
+}
+
+.info-banner-wrapper .info-banner-overlay {
+    justify-content: center;
+    /* 横方向の中央揃え */
+    align-items: center;
+    /* 縦方向の中央揃え */
+}
+
+.info-banner-text {
+    text-align: center;
+    /* 文字列自体の中心揃え */
+}
+
+/* faqページ　faq.html */
+
+/* .faq-page-section {
+        padding: 20px 15px 40px;
+    }
+    
+    .faq-question,
+    .faq-answer {
+        font-size: 13px; 
+    } */

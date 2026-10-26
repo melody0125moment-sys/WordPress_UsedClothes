@@ -1,0 +1,1806 @@
+/* リセットCSS（余白の調整） */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+html, body {
+    overflow-x: hidden; /* ★画面の横幅をはみ出た分を隠して、スキマを消す */
+}
+
+.back-link {
+    color: #443b57;
+    text-decoration: underline;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+.pc-br {
+    display: inline;
+}
+
+/* ページ上部に戻るボタン */
+
+.page-top-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 15px;
+    bottom: 20px;
+    z-index: 9999;
+    padding: 10px 15px;
+    background-color: rgba(68, 59, 87, 0.7);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* タップ中に色を濃くする */
+.page-top-btn:active {
+    background-color: rgba(68, 59, 87, 1.0); /* 不透明度を1.0にして濃く（はっきり）させる */
+    opacity: 1;
+}
+
+/* ヘッダー全体（画面上部に固定） */
+.site-header,
+.header {
+    position: fixed;
+    /* スクロールしても上に固定 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1a1936;
+    /* Figmaのダークネイビー色 */
+    color: #ffffff;
+    z-index: 1000;
+    /* 常に一番手前に表示 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ヘッダーの中身（左右振り分け） */
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    /* ロゴを左、アイコンを右に配置 */
+    align-items: center;
+}
+
+/* ロゴデザイン */
+.logo a {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Ledger', serif;
+    /* セリフ体でシックな雰囲気に */
+    font-size: 24px;
+    letter-spacing: 2px;
+    font-weight: normal;
+}
+
+/* ハンバーガーメニューボタン */
+.menu-toggle {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+}
+
+.menu-toggle:hover {
+    opacity: 0.7;
+}
+
+/* メニュー開閉時の裏側暗幕（オーバーレイ） */
+.menu-overlay {
+    position: fixed;
+    top: 57px;             /* ★ヘッダーの真下から画面下部までを暗くする */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 990;          /* メニューの裏側に配置 */
+}
+
+/* 暗幕アクティブ時 */
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* グローバルメニュー（PC用：右側からスライドイン） */
+.global-menu {
+    position: fixed;
+    top: 57px;             /* ★ヘッダーの高さ（70px）の「真下」からスタートさせる */
+    right: -100%;          /* 最初は画面の右外側に隠す */
+    bottom: 0;
+    width: 360px;          /* PCでのメニューの幅（スマホは下で上書き） */
+    background-color: #1a1936;
+    padding: 20px 0 40px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    transition: right 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 995;          /* ヘッダー(1000)よりは下、コンテンツよりは上に配置 */
+}
+
+/* メニューアクティブ時（表示状態） */
+.global-menu.active {
+    right: 0;
+}
+
+/* メニューリストと区切り線 */
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-list li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* 白の細い区切り線 */
+}
+
+.menu-list li a {
+    display: block;
+    padding: 16px 32px;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: background-color 0.2s ease;
+}
+
+.menu-list li a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+
+/* メインビジュアル（ヒーローセクション） */
+.hero {
+    height: 80vh;
+    /* 画面高さの約80%の高さにする */
+    background-image: url('images/hero-bg.jpg');
+    /* さっき保存した画像パス */
+    background-size: cover;
+    /* 画面いっぱいに綺麗に広げる */
+    background-position: center;
+    /* 画像の中心を表示 */
+    position: relative;
+}
+
+/* 画像の上に薄い暗い膜を重ねて文字を見やすくする（オーバーレイ） */
+.hero-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 黒色を50%透過 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* テキストエリア */
+.hero-content {
+    color: #ffffff;
+    padding: 0 20px;
+}
+
+/* THRIFT タイトル */
+.hero-title {
+    font-family: 'Ledger', serif;
+    font-size: 64px;
+    font-weight: normal;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+}
+
+/* キャッチコピー */
+.hero-subtitle {
+    font-family: serif;
+    /* セリフ体 */
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+/* お知らせセクション全体 */
+.news-section {
+    background-color: #e8e8e0;
+    /* 背景の生成り／薄いグレージュ色 */
+    padding: 60px 20px;
+}
+
+/* 中央寄せ用コンテナ */
+.news-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* 内側のグレーボックス */
+.news-box {
+    background-color: #dcdfe6;
+    /* 内側の薄いグレー */
+    width: 100%;
+    max-width: 600px;
+    padding: 24px 32px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* 「ℹ お知らせ」ヘッダー */
+.news-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #564F65;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.news-icon {
+    font-size: 16px;
+}
+
+/* お知らせリスト */
+.news-list {
+    list-style: none;
+}
+
+/* お知らせリストの項目の間隔を調整する */
+.news-list li {
+    margin-bottom: 12px; /* リスト項目間の調整 */
+}
+
+.news-list li a {
+    color: #564F65;
+    text-decoration: underline;
+    /* 下線あり */
+    font-size: 14px;
+    transition: opacity 0.2s;
+}
+
+.news-list li a:hover {
+    opacity: 0.7;
+    /* ホバー時に少し透明にする */
+}
+
+/* コンセプトバナーセクション全体 */
+.concept-banner {
+    background-color: #e8e8e0;
+    /* 背景の生成り色（お知らせと合わせる） */
+    padding-top: 60px;   
+    padding-bottom: 80px;        /* ★上下にたっぷりとパディングをとることで、外側の白を露出させずにスペースを作る */
+    margin: 0;
+    width: 100%;
+}
+
+/* 幅の制限と中央寄せ */
+.concept-banner-container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* ヒーローエリアと同じ最大幅（1200px）にして中央寄せ */
+.concept-banner-container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* バナー本体 */
+.concept-banner-link {
+    display: block;
+    text-decoration: none;
+    height: 300px;
+    /* バナーの高さ */
+    background-image: url('images/about-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 0;
+}
+
+/* 暗い膜（オーバーレイ） */
+.concept-banner-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+/* ホバー時の演出 */
+.concept-banner-link:hover .concept-banner-overlay {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* 「THRIFTについて」タイトル文字 */
+.concept-banner-title {
+    color: #ffffff;
+    font-family: 'Ledger', serif;
+    font-size: 32px;
+    font-weight: normal;
+    letter-spacing: 3px;
+}
+
+/* ピックアップセクション全体 */
+.pickup-section {
+    background-color: #e8e8e0;
+    /* 背景の生成り色 */
+    padding: 40px 20px 60px;
+}
+
+/* 中央寄せコンテナ */
+.pickup-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* タイトルエリア */
+.pickup-header {
+    margin-bottom: 24px;
+}
+
+.pickup-title {
+    font-size: 22px;
+    font-family: serif;
+    color: #564F65;
+    /* 指定したカラー */
+    font-weight: normal;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+/* 英語サブタイトル（筆記体／セリフ体） */
+.pickup-subtitle {
+    font-family: 'MonteCarlo', cursive;
+    font-style: italic;
+    font-size: 20px;
+    color: #7a7585;
+}
+
+/* 4列横並びのレイアウト */
+.pickup-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 均等に4列 */
+    gap: 20px;
+    /* 画像同士の間隔 */
+    margin-bottom: 30px;
+}
+
+/* バナーカード */
+.pickup-card {
+    display: block;
+    overflow: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.pickup-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 枠いっぱいに綺麗に表示 */
+    display: block;
+}
+
+/* ホバー時にほんのり拡大 */
+.pickup-card:hover {
+    transform: translateY(-5px);
+    /* 少し上に浮き上がる */
+    opacity: 0.8;
+}
+
+/* 「→もっと見る」リンク */
+.pickup-more {
+    text-align: left;
+}
+
+.pickup-more a {
+    color: #564F65;
+    text-decoration: underline;
+    font-size: 15px;
+    transition: opacity 0.2s;
+}
+
+.pickup-more a:hover {
+    opacity: 0.7;
+}
+
+/* 新着商品セクション全体 */
+.products-section {
+    background-color: #e8e8e0;
+    padding: 40px 20px 60px;
+}
+
+.products-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* セクションタイトル */
+.products-header {
+    margin-bottom: 24px;
+}
+
+.products-title {
+    font-family: serif;
+    font-size: 22px;
+    color: #564F65;
+    font-weight: normal;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.products-subtitle {
+    font-family: 'MonteCarlo', cursive;
+    font-size: 20px;
+    color: #7a7585;
+    font-weight: normal;
+}
+
+/* 5列均等グリッド */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+/* 商品カード */
+.product-card {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* 商品情報テキストエリア */
+.product-info {
+    font-size: 13px;
+    color: #564F65;
+    line-height: 1.7;
+}
+
+/* 商品画像エリア（クリック不可・ホバーなし） */
+.product-image-wrap {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 正方形に揃える */
+    overflow: hidden;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+}
+
+.product-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* transition や :hover の設定はすべて削除 */
+}
+/* 左に寄ってしまうのを防ぐ（中央寄せの確実な適用） */
+.products-container {
+    max-width: 1200px;
+    margin: 0 auto; /* 左右自動で中央に配置 */
+    width: 100%;    /* ★幅を100%にして確実にコンテナを効かせる */
+    box-sizing: border-box;
+}
+/* 価格 */
+.product-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #564F65;
+}
+
+.product-price .currency {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+/* 税込価格 */
+.product-tax {
+    font-size: 11px;
+    color: #888888;
+    margin-bottom: 4px;
+}
+
+/* ブランド名・サイズ・コンディション */
+.product-brand,
+.product-size,
+.product-condition {
+    color: #666666;
+    font-size: 12px;
+}
+
+.product-condition {
+    margin-bottom: 10px;
+}
+
+/* 「→もっと見る」リンク */
+.products-more {
+    text-align: left;
+}
+
+.products-more a {
+    color: #564F65;
+    text-decoration: underline;
+    font-size: 15px;
+    transition: opacity 0.2s;
+}
+
+.products-more a:hover {
+    opacity: 0.7;
+}
+
+/* 3連バナーセクション全体 */
+.info-banners-section {
+    background-color: #e8e8e0;
+    padding: 0 0 50px 0; /* 上・左右を0、下に50pxのパディング */
+    margin: 0;
+    width: 100%;
+}
+
+/* 3つを横並びにするコンテナ */
+.info-banners-container {
+    max-width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 均等に3列 */
+    gap: 0;
+    /* バナー同士の間隔 */
+}
+
+/* 個別のバナーリンク */
+.info-banner-link {
+    display: block;
+    text-decoration: none;
+    height: 200px;
+    /* バナーの高さ（お好みで調整可） */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+/* 薄暗い膜（オーバーレイ） */
+.info-banner-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* ご希望の薄暗い膜 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+/* ホバー時に少し明るくする演出 */
+.info-banner-link:hover .info-banner-overlay {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* バナーの文字 */
+.info-banner-text {
+    color: #ffffff;
+    font-family: serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+/* PCではスマホ用改行を非表示にして一行にする */
+.sp-br {
+    display: none;
+}
+
+/* ブランド情報テキストエリア */
+.brand-info {
+    text-align: center;
+    margin-top: 8px;
+}
+
+/* 英語ブランド名 */
+.brand-name-en {
+    font-family: serif;
+    font-size: 15px;
+    color: #564F65;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+/* 日本語ブランド名 */
+.brand-name-ja {
+    font-size: 12px;
+    color: #7a7585;
+    font-family: serif;
+}
+
+/* スタッフ募集セクション全体 */
+.recruit-section {
+    background-color: #e8e8e0;
+    /* 背景色 */
+    padding: 80px 20px 140px 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.recruit-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* タイトルテキスト */
+.recruit-title {
+    font-family: serif;
+    font-size: 25px;
+    color: #564F65;
+    font-weight: normal;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+}
+
+/* 矢印エリア */
+.recruit-arrows {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 24px;
+}
+
+.recruit-arrows .arrow {
+    font-size: 11px;
+    color: #564F65;
+    line-height: 2;
+}
+
+/* 募集要項を見るボタン（二重線風デザイン） */
+.recruit-btn {
+    display: inline-block;
+    padding: 12px 36px;
+    background-color: #564F65;
+    /* ボタン背景色 */
+    color: #ffffff;
+    /* 文字色 */
+    font-family: serif;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 8px;
+    /* 外側の角丸 */
+    border: 2px solid #ffffff;
+    /* 内側の白いライン効果 */
+    outline: 2px solid #564F65;
+    /* 外側のダークライン効果 */
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.recruit-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+/* SNSセクション全体 */
+.sns-section {
+    background-color: #e8e8e0;
+    padding: 0 0 60px 0;
+    /* 左右の余白をゼロに */
+    width: 100%;
+    padding: 0;
+}
+
+/* 2列並び（コンテナ） */
+.sns-container {
+    max-width: 100%;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+}
+
+/* SNSカード */
+.sns-card {
+    display: block;
+    text-decoration: none;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+/* 全体の薄暗いオーバーレイ */
+.sns-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.sns-card:hover .sns-overlay {
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+/* 中央の半透明ホワイト（ライトグレー）ボックス */
+.sns-box {
+    background-color: rgba(230, 230, 230, 0.73);
+    /* 半透明の薄いグレーボックス */
+    width: 100%;
+    max-width: 680px;
+    height: 100%;
+    padding: 20px 35px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+/* 左側：アイコン＆アカウント名 */
+.sns-box-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+}
+
+.sns-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.line-icon {
+    width: 80px; 
+    height: 80px; /* インスタアイコンと視覚的な大きさを揃える*/
+    margin-bottom: 0px;
+}
+
+.sns-account {
+    font-size: 12px;
+    font-family: serif;
+    color: #564F65;
+}
+
+/* 右側：タイトル＆説明文 */
+.sns-box-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.sns-title {
+    font-size: 16px;
+    font-family: serif;
+    color: #564F65;
+    font-weight: bold;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #564F65;
+    /* タイトル下線 */
+    width: 100%;
+    text-align: center;
+    /* ★文字を線の中央に配置 */
+}
+
+
+
+.sns-desc {
+    font-size: 12px;
+    font-family: serif;
+    color: #564F65;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    text-align: center;
+    width: 100%;
+}
+
+/* フッター全体 */
+.site-footer {
+    /* 直前のセクションの背景色（#e8e8e0）から、フッターの濃い色（#1a1936）へ滑らかにグラデーションさせます */
+    background: linear-gradient(to bottom, #e8e8e0 0%, #1a1936 150px);
+    background-color: #1a1936;
+    color: #ffffff;
+    padding: 250px 80px 100px 80px;
+    /* 上部のパディングを大きくとって、文字を下の濃いエリアに配置 */
+    width: 100%;
+    margin-top: 0;
+}
+
+/* フッター内のレイアウト */
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 左側：ブランドロゴ */
+.footer-brand a {
+    font-family: 'Ledger', serif;
+    font-size: 42px;
+    letter-spacing: 3px;
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 40px;
+}
+
+/* 右側：リンクメニュー全体のブロック */
+.footer-links {
+    margin-right: 40px;
+}
+
+.footer-menu {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 24px 60px;
+    /* 行間・列間をゆったり取る */
+    padding: 0;
+    margin: 0;
+}
+
+.footer-menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: serif;
+    font-size: 17px;
+    /* ★文字サイズをさらに大きくして読みやすく */
+    letter-spacing: 0.8px;
+    transition: opacity 0.3s ease;
+}
+
+.footer-menu li a:hover {
+    opacity: 0.7;
+}
+/* コピーライトのスタイル */
+.footer-copyright {
+    text-align: right;         /* 画面中央に配置 */
+    color: rgba(255, 255, 255, 0.6); /* 少しだけ透明感を持たせた白（上品に見えます） */
+    font-size: 11px;            /* 小さめにスッキリと */
+    font-family: sans-serif;    /* メインのフォントより少しシンプルにすると綺麗です */
+    letter-spacing: 1px;
+    margin-top: 100px;           /* メニューやロゴとの間にしっかり余白を空ける */
+    margin-bottom: 0;
+}
+
+/* お知らせ詳細 */
+/* 全体の背景と余白 */
+.news-detail-section {
+    background-color: #e8e8e0;
+    padding: 100px 20px 80px 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* 中央のグレー角丸ボックス */
+.news-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #dcdfe6;
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
+/* タイトルと日付エリア */
+.news-detail-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(86, 79, 101, 0.5);
+    padding-bottom: 20px;
+}
+
+.news-detail-header h1 {
+    font-size: 20px;
+    color: #564F65;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.news-detail-header span {
+    font-size: 12px;
+    color: #7a7585;
+}
+
+/* 本文エリア */
+.news-detail-body {
+    font-size: 14px;
+    color: #564F65;
+    line-height: 1.8;
+}
+
+.news-detail-body p {
+    margin-bottom: 20px;
+}
+
+.news-detail-body .schedule-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.news-detail-body ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+/* コンセプト詳細：about.html */
+body:has(.about-banner-overlay) .concept-banner-section {
+    padding-top: 57px;
+    margin-top: 0;
+}
+/* ホバーしないコンセプトページ専用のオーバーレイ */
+.about-banner-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transitionやホバーの記述はあえて書かない！ */
+}
+
+/* ショップコンセプトセクション */
+.shop-concept {
+    padding: 80px 20px;
+    text-align: center;
+    font-family: serif;
+    color:#443B57;
+    background-color: #e8e8e0;
+}
+
+.shop-concept h2 {
+    font-size: 22px;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+.concept-subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.concept-text {
+    font-size: 14px;
+    line-height: 2.5;
+    color: #333333;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: serif;
+    color:#443B57;
+    padding-bottom: 100px;
+    border-bottom: 1px solid rgba(86, 79, 101, 0.5);
+}
+
+/* selectionセクション */
+.shop-selection {
+    padding: 20px 20px;
+    text-align: center;
+    font-family: serif;
+    color:#443B57;
+    background-color: #e8e8e0;
+}
+
+.shop-selection h2 {
+    font-size: 22px;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+.selection-subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.selection-text {
+    font-size: 14px;
+    line-height: 2.5;
+    color: #333333;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: serif;
+    color:#443B57;
+    padding-bottom: 100px;
+    border-bottom: 1px solid rgba(86, 79, 101, 0.5);
+}
+
+
+
+/* Informationセクション全体の枠組み */
+/* 1. 一番外側の枠：画面いっぱいに背景色を敷く */
+.shop-info-section {
+    width: 100%;
+    background-color: #e8e8e0;
+    padding: 40px 20px;       /* 上下にしっかり余白をとる */
+}
+
+/* 2. Informationの見出し */
+.shop-info-section h2 {
+    text-align: center;       
+    color: #443B57;           
+    font-size: 22px;
+    font-family: serif; 
+    margin-bottom: 40px;      /* ★下との間隔をしっかり空ける */
+}
+
+/* 3. 中身のコンテンツ枠：ここで横幅を絞って画面中央に寄せる */
+.info-content-wrapper {
+    max-width: 900px;         /* 中身の横幅 */
+    margin: 0 auto;           /* 画面中央に配置 */
+}
+
+/* 4. 左側のテキスト＆マップエリア */
+/* 左側のテキスト＆マップエリアをまとめる親枠 */
+.info-left {
+    max-width: 500px; /* ★好みに応じて幅を狭めると、より中央に寄ります */
+    margin: 0 auto;   /* ★これでブロック全体が中央に配置されます */
+}
+
+/* リスト自体の文字は左揃えにする */
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left; /* 文字自体は左揃え */
+}
+
+.info-list li {
+    font-size: 14px;
+    color: #443B57;
+    line-height: 2.2;         /* 行間をゆったり開ける */
+}
+
+.google-map iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: 4px; /* お好みで角を丸く */
+    display: block;
+}
+
+/* 架空サイトの※注意書きスタイル */
+.fictitious-note {
+    text-align: center;
+    font-size: 12px;
+    color: #665F75;       /* メインの文字色（#443B57）より少し薄めの落ち着いた色 */
+    margin-top: 25px;     /* マップとの間の余白 */
+    letter-spacing: 1px;
+}
+
+/* ピックアップ */
+/* ピックアップセクション全体（背景色をここで綺麗に1つにまとめる） */
+.all-pickup-section {
+    background-color: #e8e8e0;
+    padding: 80px 80px 20px 20px; /* 下に余裕を持たせて下のページやフッターへ自然に繋げる */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 中央寄せコンテナ */
+.all-pickup-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* タイトルとページネーションを横並びにするエリア */
+.all-pickup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(86, 79, 101, 0.3);
+    padding-bottom: 15px;
+}
+.all-pickup-title {
+ font-size: 18px;
+ font-weight: normal;
+}
+
+/* ページネーション */
+.pagination {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    font-family: serif;
+}
+
+.pagination a, 
+.pagination .current {
+    color: #443B57;
+    text-decoration: none;
+}
+
+.pagination .current {
+    font-weight: bold;
+    border-bottom: 1px solid #443B57;
+}
+
+/* 4列横並びのレイアウト */
+.all-pickup-grid {
+    display: grid;
+    grid-repeat: repeat(4, 1fr); /* 念のため修正：grid-template-columns です！ */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px 20px;
+}
+
+/* バナーカード全体のリンク */
+.all-pickup-card a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.all-pickup-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* カードの文字タイトルと説明文 */
+.card-title {
+    font-size: 14px;
+    font-family: serif;
+    color: #443B57;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+
+.card-text {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #666666;
+    margin-top: 0;
+}
+
+/* ホバー時にほんのり拡大 */
+.all-pickup-card a:hover {
+    transform: translateY(-4px);
+    opacity: 0.8;
+}
+
+.pickup-footer-area {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between; /* 左右の端にそれぞれ配置 */
+    align-items: center;
+}
+
+/* ピックアップ詳細ページ */
+.pickup-detail-section {
+    background-color: #e8e8e0;
+    padding: 100px 20px 80px 20px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.pickup-detail-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+
+.back-link-wrapper {
+    margin-bottom: 30px;
+}
+
+/* 左右2カラムレイアウト */
+.pickup-detail-content {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* 左側：画像 */
+.pickup-detail-image {
+    flex: 1;
+    max-width: 450px;
+}
+
+.pickup-detail-image img {
+    width: 90%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+}
+
+/* 右側：文章 */
+.pickup-detail-body {
+    flex: 1.4;
+    color: #443b57;
+}
+
+.pickup-detail-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+.pickup-detail-block {
+    margin-bottom: 25px;
+}
+
+.pickup-detail-subheading {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.pickup-detail-body p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+}
+
+.pickup-detail-list {
+    list-style: disc;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* 1つ目の文章の下に配置する画像のスタイル */
+.section-inline-image {
+    margin: 20px 0; /* 上下の余白 */
+    max-width: 50%;
+}
+
+.section-inline-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px; /* お好みで角丸 */
+}
+
+/* 新着入荷商品一覧　new-arrivals.html */
+
+.all-arrivals-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(86, 79, 101, 0.3);
+    padding-bottom: 15px;
+}
+.all-arrivals-title {
+ font-size: 18px;
+ font-weight: normal;
+}
+
+.all-arrivals-section {
+    background-color: #e8e8e0;
+    padding: 80px 80px 20px 20px; /* 下に余裕を持たせて下のページやフッターへ自然に繋げる */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 中央寄せコンテナ */
+.all-arrivals-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* タイトルとページネーションを横並びにするエリア */
+.all-arrivals-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(86, 79, 101, 0.3);
+    padding-bottom: 15px;
+}
+.all-arrivals-title {
+ font-size: 18px;
+ font-weight: normal;
+}
+
+.all-arrivals-footer-area {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between; /* 左右の端にそれぞれ配置 */
+    align-items: center;
+}
+
+/* 案内ページ全体 */
+.info-page-section {
+    background-color: #e8e8e0; /* 統一の背景色 */
+    padding: 100px 20px 80px;
+    min-height: calc(100vh - 200px);
+}
+
+.info-page-container {
+    max-width: 800px; /* テキストが読みやすい幅に設定 */
+    margin: 0 auto;
+}
+
+/* バナーの配置・調整 */
+.info-banner-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+/* バナー部分（既存スタイルの活用＋中央表示用調整） */
+.info-banner-wrapper .info-banner-link {
+    display: block;
+    width: 100%;
+    max-width: 500px; /* ワイヤーフレームに合わせたバナー幅 */
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+    pointer-events: none; /* 単なる見出し・ビジュアルとして使う場合 */
+}
+
+.info-banner-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* 背景をほんのり暗くして文字を立ち上げ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-banner-text {
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    font-family: serif;
+    text-align: center;
+}
+
+/* 文章・段落デザイン */
+.info-lead-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #443B57;
+    margin-bottom: 35px;
+}
+
+.info-block {
+    margin-bottom: 35px;
+}
+
+.info-subheading {
+    font-size: 15px;
+    font-weight: bold;
+    color: #443B57;
+    margin-bottom: 12px;
+}
+
+.info-block p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #443B57;
+    margin-bottom: 12px;
+}
+
+.info-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.info-link {
+    color: #443b57;
+    text-decoration: underline;
+}
+
+.info-note {
+    font-size: 13px;
+    color: #555555;
+}
+
+/* faqページ　faq.html */
+/* FAQページ（faq-onlyクラスを持つページ）のバナー下だけ間隔を広げる */
+.info-page-section.faq-only .info-banner-wrapper {
+    margin-bottom: 100px; /* お好みで 60px や 70px などに調整してください */
+}
+
+/* カテゴリー見出し */
+.faq-category-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #443b57;
+    margin-bottom: 20px;
+}
+
+/* アコーディオン全体（枠線） */
+.faq-item {
+    border-bottom: 1px solid #d0d0c8;
+    background-color: transparent;
+}
+
+/* 質問エリア（summary） */
+.faq-question {
+    display: flex;
+    align-items: flex-start;
+    padding: 18px 0;
+    cursor: pointer;
+    list-style: none; /* デフォルトの三角マークを消す */
+    position: relative;
+}
+
+/* デフォルトのマーカー（Safari等対策） */
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+/* QとAのラベル（文字が下に回り込まないための固定幅） */
+.faq-label {
+    font-weight: bold;
+    color: #443b57;
+    width: 24px;
+    flex-shrink: 0;
+}
+
+/* 質問・回答のテキスト部分 */
+.faq-text,
+.faq-answer-text {
+    flex-grow: 1;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #443b57;
+}
+
+/* プラス・マイナスアイコンの表現（CSSで実装） */
+.faq-icon {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
+/* プラスの横棒 */
+.faq-icon::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 14px;
+    height: 2px;
+    background-color: #443b57;
+}
+
+/* プラスの縦棒（閉じているときだけ表示してプラスにする） */
+.faq-item:not([open]) .faq-icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 6px;
+    width: 2px;
+    height: 14px;
+    background-color: #443b57;
+}
+
+/* 回答エリア */
+.faq-answer {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 0 20px 0;
+}
+
+/* スタッフ募集　recruit.html */
+
+/* 1. バナー下の余白を確保 */
+.recruit-page .info-banner-wrapper {
+    margin-bottom: 60px;
+}
+
+/* 2. 導入文章エリア（ここだけ中央揃え） */
+
+.recruit-page .recruit-intro {
+    text-align: center;
+    margin-top:50px;
+    margin-bottom: 60px;
+}
+
+.recruit-page .recruit-intro .recruit-subheading {
+    font-size: 15px;
+    font-weight: bold;
+    color: #443B57;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.recruit-page .recruit-intro .recruit-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #443B57;
+    text-align: center;
+}
+
+/* スタッフ募集ページの導入タイトルと本文の間だけ広げる */
+.recruit-page .recruit-intro .recruit-subheading {
+    margin-bottom: 35px; 
+}
+/* 3. 募集要項・応募方法エリア（左寄せ・枠線削除） */
+.recruit-page .recruit-section {
+    border-top: none; /* 上の境界線を撤去 */
+    text-align: left;
+    background-color: #dcdfe6;
+    padding: 30px 20px;
+    margin-top: 30px;
+    border-radius: 6px;
+}
+
+.recruit-page .recruit-section-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #443B57;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.recruit-page .recruit-block {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.recruit-page .recruit-item-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #443B57;
+    margin-bottom: 6px;
+}
+
+.recruit-page .recruit-item-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #443B57;
+}
+
+/* 4. 箇条書き・番号リスト（左寄せ＋整列） */
+.recruit-page .recruit-list {
+    list-style: disc inside;
+    padding-left: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.recruit-page .recruit-list li,
+.recruit-page .recruit-number-list li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #443B57;
+    margin-bottom: 4px;
+}
+
+.recruit-page .recruit-number-list {
+    list-style: decimal inside;
+    padding-left: 0;
+    margin: 0;
+    text-align: left;
+}
+
+/* 5. 応募方法ブロックの上の余白（適度な距離感） */
+.recruit-page .recruit-apply-block {
+    margin-top: 45px;
+}
+
+/* お問い合わせページ */
+
+/* 1. タイトルエリア（中央揃え＋下線） */
+.contact-page .contact-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact-page .contact-title {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: normal;
+    color: #443B57;
+    padding-bottom: 8px;
+    border-bottom: 1.3px solid rgba(86, 79, 101, 0.3);
+    letter-spacing: 0.05em;
+}
+
+/* 2. コンテンツ部分（左寄せ・文字色統一） */
+.contact-page .contact-content {
+    text-align: left;
+}
+
+.contact-page .contact-lead {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #443B57;
+    margin-bottom: 35px;
+}
+
+.contact-page .contact-block {
+    margin-bottom: 35px;
+}
+
+.contact-page .contact-subheading {
+    font-size: 14px;
+    font-weight: bold;
+    color: #443B57;
+    margin-bottom: 12px;
+}
+
+.contact-page .contact-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #443B57;
+    margin-bottom: 12px;
+}
+
+/* FAQへのリンク */
+.contact-page .contact-link {
+    display: inline-block;
+    font-size: 14px;
+    color: #443B57;
+    text-decoration: underline;
+    margin-top: 4px;
+}
+
+.contact-page .contact-link:hover {
+    opacity: 0.7;
+}
+
+/* 注意事項のリスト */
+.contact-page .contact-list {
+    list-style: disc inside;
+    padding-left: 0;
+    margin: 0 0 25px 0;
+}
+
+.contact-page .contact-list li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #443B57;
+    margin-bottom: 6px;
+}
+
+/* 箇条書きの改行後も文字位置をきれいに揃える設定 */
+.contact-list li,
+.recruit-list li {
+    list-style-type: disc;
+    list-style-position: outside; /* 外側に配置してインデントで綺麗に揃える */
+    margin-left: 1.2em;           /* 全体の左マージン */
+    padding-left: 0.3em;
+    text-indent: 0;
+}
+
+/* LINEボタンのスタイル（テキスト風〜シンプルな枠付きボタン） */
+.contact-page .contact-btn-wrapper {
+    margin-top: 20px;
+}
+
+.contact-page .contact-line-btn {
+    display: inline-block;
+    font-size: 14px;
+    color: #443B57;
+    text-decoration: none;
+    border: 1px solid #443B57;
+    padding: 10px 20px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.contact-page .contact-line-btn:hover {
+    background-color: #443B57;
+    color: #ffffff;
+}
+
+/* プライバシーポリシー */
+
+/* 1. タイトルエリア */
+.privacy-page .privacy-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.privacy-page .privacy-title {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: normal;
+    color: #443B57;
+    padding-bottom: 8px;
+    border-bottom: 1.3px solid rgba(86, 79, 101, 0.3);
+    letter-spacing: 0.05em;
+}
+
+/* 2. コンテンツ（左寄せ） */
+.privacy-page .privacy-content {
+    text-align: left;
+}
+
+.privacy-page .privacy-lead {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #443B57;
+    margin-bottom: 35px;
+}
+
+.privacy-page .privacy-block {
+    margin-bottom: 30px;
+}
+
+.privacy-page .privacy-subheading {
+    font-size: 14px;
+    font-weight: bold;
+    color: #443B57;
+    margin-bottom: 10px;
+}
+
+.privacy-page .privacy-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #443B57;
+    margin-bottom: 8px;
+}
+
+/* 3. 箇条書きリスト（改行時インデント崩れ対策済み） */
+.privacy-page .privacy-list {
+    margin: 0;
+    padding-left: 0;
+}
+
+.privacy-page .privacy-list li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #443B57;
+    list-style-type: disc;
+    list-style-position: outside;
+    margin-left: 1.2em;
+    padding-left: 0.3em;
+    margin-bottom: 4px;
+}

@@ -1,0 +1,111 @@
+<?php
+/*
+Template Name: ABOUTページ
+*/
+get_header();
+?>
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THRIFTについて | THRIFT</title>
+    <!-- 共通のCSSやスマホ用CSSの読み込み -->
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/style.css">
+    <!-- ★スマホ用の別CSS（768px以下でのみ読み込まれる） -->
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/sp.css" media="screen and (max-width: 768px)">
+
+    <!-- Font Awesome（アイコン用） -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- 共通ヘッダー読み込みエリア -->
+    <?php get_header(); ?>
+
+    <!-- メインコンテンツ -->
+    <main class="about-main">
+
+        <!-- 1. メインビジュアル（写真＋タイトル） -->
+        <!-- メインビジュアル -->
+        <section class="concept-banner-section">
+            <div class="concept-banner-link">
+                <div class="about-banner-overlay">
+                    <h1 class="concept-banner-title">THRIFTについて</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- ショップコンセプト -->
+        <section class="shop-concept">
+            <h2>Shop Concept</h2>
+            <p class="concept-subtitle">丁寧に選んだ服と暮らす、洗練された日常。</p>
+            <p class="concept-text">
+                都会の喧騒を離れ、
+                緑豊かな地方の街並みに佇む<br class="sp-br">セレクト古着店「THRIFT」。<br>
+                慌ただしいスピードから少しだけ距離を置いて、<br class="sp-br">
+                自分にとって心地よい時間を大切にする。<br>
+                そんな日々の暮らしにそっと寄り添う、<br class="sp-br">
+                ワードローブを提案しています。
+            </p>
+        </section>
+
+        <section class="shop-selection">
+            <h2>Our Selection</h2>
+            <p class="selection-subtitle">国を超えて出逢う、唯一無二の風合い。</p>
+            <p class="selection-text">
+                THRIFTの店内に並ぶ洋服たちは、<br class="sp-br">店主自らが国外へ足を運び、<br>現地で一枚一枚手に取りながら厳選したセレクトです。<br>
+
+                年代やブランドの知名度だけに囚われることなく、<br>生地が持つ確かな質感、現代の日常に馴染む美しく<br class="sp-br">上品なシルエット、<br
+                    class="pc-br">そして時を重ねることでしか<br class="sp-br">生まれない絶妙な風合い。<br>それらを大切に、大人の日常着として誇れる一着だけ<br
+                    class="sp-br">を丁寧に買い付けています。<br>
+
+                遠い街の歴史や人の手を経て、<br class="sp-br">静岡の小さな店へと辿り着いた特別な服たち。<br>
+                新品にはないストーリーと、<br class="sp-br">他にはない自分だけの一着との出逢いを、<br>どうぞ心ゆくまでお楽しみください。
+            </p>
+        </section>
+
+        <!-- 店舗情報・マップ・スタイリング写真エリア -->
+        <section class="shop-info-section">
+            <h2>Information</h2>
+
+            <div class="info-content-wrapper">
+                <!-- 左側：テキスト情報 ＆ Google MAP -->
+                <div class="info-left">
+                    <ul class="info-list">
+                        <li><span>所在地：</span>静岡県静岡市XXXX</li>
+                        <li><span>営業時間：</span>11:00 - 19:00</li>
+                        <li><span>定休日：</span>不定休（※GW中や年末年始の休業日はHPにてお知らせいたします）</li>
+                        <li><span>お問い合わせ：</span>XXX-XXXX-XXXX</li>
+                    </ul>
+
+                    <!-- Google MAP 埋め込みエリア -->
+                    <div class="google-map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d833891.579653584!2d137.699719681233!3d35.27145387814994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601bbf207a58856f%3A0xadc77626a8878101!2z6Z2Z5bKh55yM6Z2Z5bKh5biC!5e0!3m2!1sja!2sjp!4v1792651110996!5m2!1sja!2sjp"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                        <p class="fictitious-note">※当サイトは架空の店舗をイメージしたポートフォリオ用の架空サイトです。</p>
+                    </div>
+                </div>
+                <div class="back-link" style="margin-top:50px">
+                    <a href="index.html">← トップページに戻る</a>
+                </div>
+        </section>
+
+    </main>
+    <!-- ページトップへ戻るボタン -->
+    <a href="#" class="page-top-btn">↑ ページ上部に戻る</a>
+
+    <!-- フッターを読み込むための場所 -->
+    <?php get_footer(); ?>
+
+    <!-- 共通スクリプト（ヘッダー自動読み込みなど） -->
+    <script src="<?php echo get_template_directory_uri(); ?>/script.js"></script>
+
+</body>
+
+</html>
