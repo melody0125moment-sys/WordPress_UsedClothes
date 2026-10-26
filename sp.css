@@ -493,9 +493,10 @@ body:has(.global-menu.active) .page-top-btn {
 
 /* ピックアップ一覧pickup.html */
 /* 1. セクション全体のパディング：上部に固定ヘッダー分の余白を開け、左右に綺麗な余白（20px）を持たせる */
+
 .all-pickup-section {
     background-color: #e8e8e0;
-    padding: 30px 20px 40px 20px !important;
+    padding: 100px 20px 40px 20px !important;
     /* 上を広めにとって見切れを防止、左右に20pxの余白 */
     width: 100%;
     box-sizing: border-box;
