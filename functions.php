@@ -43,3 +43,12 @@ function create_pickup_post_type()
     register_post_type('pickup', $args);
 }
 add_action('init', 'create_pickup_post_type');
+
+// カスタム投稿タイプ「pickup」のアーカイブページの表示件数を4件にする
+function change_pickup_posts_per_page($query) {
+    // 管理画面ではなく、かつメインクエリで、かつカスタム投稿タイプが「pickup」の場合
+    if (!is_admin() && $query->is_main_query() && is_post_type_archive('pickup')) {
+        $query->set('posts_per_page', 4);
+    }
+}
+add_action('pre_get_posts', 'change_pickup_posts_per_page');
