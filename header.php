@@ -37,8 +37,8 @@
         <ul class="menu-list">
             <li><a href="index.html#news">お知らせ</a></li>
             <li><a href="<?php echo esc_url( home_url('/about/') ); ?>">THRIFTについて</a></li>
-            <li><a href="pickup.html">ピックアップ</a></li>
-            <li><a href="new-arrivals.html">新着入荷商品</a></li>
+            <li><a href="<?php echo esc_url( home_url('/pickup/') ); ?>">ピックアップ</a></li>
+            <li><a href="<?php echo esc_url(home_url('/new_arrival/')); ?>">新着入荷商品</a></li>
             <li><a href="<?php echo esc_url( home_url('/shopping-guide/') ); ?>">商品のご購入・ご案内</a></li>
             <li><a href="<?php echo esc_url( home_url('/return/') ); ?>">返品・交換について</a></li>
             <li><a href="<?php echo esc_url( home_url('/faq/') ); ?>">よくある質問</a></li>

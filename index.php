@@ -92,21 +92,34 @@
                 </h2>
             </div>
 
-            <!-- バナー4枚のグリッド -->
-            <div class="pickup-grid">
-                <a href="pickup-1.html" class="pickup-card">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/pickup-1.jpg" alt="夏物SALE開催中！">
-                </a>
-                <a href="pickup-2.html" class="pickup-card">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/pickup-2.jpg" alt="大人のJEANS特集">
-                </a>
-                <a href="pickup-3.html" class="pickup-card">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/pickup-3.jpg" alt="Autumn Outer Collection">
-                </a>
-                <a href="pickup-4.html" class="pickup-card">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/pickup-4.jpg" alt="はじめてのVintage T-shirt">
-                </a>
-            </div>
+            <?php
+            // 「pickup」投稿を新しい順に4件取得するクエリ
+            $args = array(
+                'post_type'      => 'pickup',
+                'posts_per_page' => 4, // 表示したい件数（4件）
+                'orderby'        => 'date',
+                'order'          => 'DESC',
+            );
+            $top_pickup_query = new WP_Query($args);
+            ?>
+
+            <?php if ($top_pickup_query->have_posts()) : ?>
+                <!-- バナー4枚のグリッド -->
+                <div class="pickup-grid">
+                    <?php while ($top_pickup_query->have_posts()) : $top_pickup_query->the_post(); ?>
+
+                        <a href="<?php the_permalink(); ?>" class="pickup-card">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <?php the_post_thumbnail('full', array('alt' => get_the_title())); ?>
+                            <?php endif; ?>
+                        </a>
+
+                    <?php endwhile; ?>
+                </div>
+                <?php wp_reset_postdata(); ?>
+            <?php else : ?>
+                <p>現在ピックアップ記事はありません。</p>
+            <?php endif; ?>
 
             <!-- もっと見るリンク -->
             <div class="pickup-more">
@@ -127,82 +140,74 @@
 
             <!-- 商品カード5列グリッド -->
             <div class="products-grid">
+                <?php
+                // 1. 取得する条件の設定
+                $args = array(
+                    'post_type'      => 'new_arrival', // カスタム投稿タイプ名
+                    'posts_per_page' => 5,             // 表示する件数（5件）
+                    'orderby'        => 'date',        // 日付順
+                    'order'          => 'DESC',        // 新しい順
+                );
+                $query = new WP_Query($args);
+                ?>
 
-                <!-- 商品1 -->
-                <div class="product-card">
-                    <div class="product-image-wrap">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/item-1.jpg" alt="Harley-Davidson">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-price">4,700<span class="currency">円</span></div>
-                        <div class="product-tax">(税込5,170円)</div>
-                        <div class="product-brand">Harley-Davidson</div>
-                        <div class="product-size">メンズS</div>
-                        <div class="product-condition">コンディションA</div>
-                    </div>
-                </div>
+                <?php if ($query->have_posts()) : ?>
+                    <?php while ($query->have_posts()) : $query->the_post(); 
+                        // カスタムフィールドの値を取得
+                        $price        = get_post_meta(get_the_ID(), 'item_price', true);
+                        $brand        = get_post_meta(get_the_ID(), 'item_brand', true);
+                        $size         = get_post_meta(get_the_ID(), 'item_size', true);
+                        $arrival_date = get_post_meta(get_the_ID(), 'item_arrival_date', true);
 
-                <!-- 商品2 -->
-                <div class="product-card">
-                    <div class="product-image-wrap">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/item-2.jpg" alt="Ralph Lauren">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-price">6,200<span class="currency">円</span></div>
-                        <div class="product-tax">(税込6,820円)</div>
-                        <div class="product-brand">Ralph Lauren</div>
-                        <div class="product-size">メンズXL</div>
-                        <div class="product-condition">コンディションB</div>
-                    </div>
-                </div>
+                        // 税込価格の自動計算＆カンマフォーマット
+                        $raw_price     = str_replace([',', '円'], '', $price);
+                        $tax_included  = is_numeric($raw_price) ? number_format(round($raw_price * 1.1)) : '';
+                        $formatted_price = is_numeric($price) ? number_format($price) : $price;
+                    ?>
 
-                <!-- 商品3 -->
-                <div class="product-card">
-                    <div class="product-image-wrap">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/item-3.jpg" alt="Carhartt">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-price">3,800<span class="currency">円</span></div>
-                        <div class="product-tax">(税込4,180円)</div>
-                        <div class="product-brand">Carhartt</div>
-                        <div class="product-size">レディースL</div>
-                        <div class="product-condition">コンディションA</div>
-                    </div>
-                </div>
+                        <!-- 商品カード -->
+                        <div class="product-card">
+                            <div class="product-image-wrap">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php the_post_thumbnail('full'); ?>
+                                <?php else : ?>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/no-image.jpg" alt="No Image">
+                                <?php endif; ?>
+                            </div>
+                            <div class="product-info">
+                                <?php if ($price) : ?>
+                                    <div class="product-price"><?php echo esc_html($formatted_price); ?><span class="currency">円</span></div>
+                                <?php endif; ?>
 
-                <!-- 商品4 -->
-                <div class="product-card">
-                    <div class="product-image-wrap">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/item-4.jpg" alt="Columbia">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-price">5,900<span class="currency">円</span></div>
-                        <div class="product-tax">(税込6,490円)</div>
-                        <div class="product-brand">Columbia</div>
-                        <div class="product-size">メンズXL</div>
-                        <div class="product-condition">コンディションC</div>
-                    </div>
-                </div>
+                                <?php if ($tax_included) : ?>
+                                    <div class="product-tax">(税込<?php echo $tax_included; ?>円)</div>
+                                <?php endif; ?>
 
-                <!-- 商品5 -->
-                <div class="product-card">
-                    <div class="product-image-wrap">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/item-5.jpg" alt="LACOSTE">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-price">4,300<span class="currency">円</span></div>
-                        <div class="product-tax">(税込4,730円)</div>
-                        <div class="product-brand">LACOSTE</div>
-                        <div class="product-size">レディースM</div>
-                        <div class="product-condition">コンディションB</div>
-                    </div>
-                </div>
+                                <?php if ($brand) : ?>
+                                    <div class="product-brand"><?php echo esc_html($brand); ?></div>
+                                <?php endif; ?>
+
+                                <?php if ($size) : ?>
+                                    <div class="product-size"><?php echo esc_html($size); ?></div>
+                                <?php endif; ?>
+
+                                <?php if ($arrival_date) : ?>
+                                    <div class="product-condition">入荷日：<?php echo esc_html($arrival_date); ?></div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                    <?php endwhile; ?>
+                    <?php wp_reset_postdata(); ?>
+                <?php else : ?>
+                    <p>現在、新着商品はありません。</p>
+                <?php endif; ?>
 
             </div>
 
             <!-- もっと見るリンク -->
             <div class="products-more">
-                <a href="new-arrivals.html">&rarr;もっと見る</a>
+                <a href="<?php echo esc_url(home_url('/new_arrival/')); ?>">&rarr;もっと見る</a>
             </div>
         </div>
     </section>

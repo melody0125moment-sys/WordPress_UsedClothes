@@ -29,4 +29,7 @@
 <!-- ページトップへ戻るボタン -->
 <a href="#" class="page-top-btn">↑ ページ上部に戻る</a>
 
+<!-- 共通スクリプト -->
+    <script src="<?php echo get_template_directory_uri(); ?>/script.js"></script>
+
 <?php get_footer(); ?>

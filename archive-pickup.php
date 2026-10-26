@@ -38,12 +38,11 @@
                             <div class="card-content">
                                 <h3 class="card-title"><?php the_title(); ?></h3>
                                 <div class="card-text">
-                                    <?php
-                                    $content = get_post(get_the_ID())->post_content;
-                                    $content = strip_tags($content, '<br><br class="pc-br"><br class="sp-br"><strong><span>');
-                                    echo nl2br($content);
-                                    ?>
-                                </div>
+    <?php 
+    // 一覧用の一言（抜粋）を自動で表示する
+    the_excerpt(); 
+    ?>
+</div>
                             </div>
                         </a>
                     </article>
@@ -78,5 +77,8 @@
 
 <!-- ページトップへ戻るボタン -->
 <a href="#" class="page-top-btn">↑ ページ上部に戻る</a>
+
+<!-- 共通スクリプト -->
+    <script src="<?php echo get_template_directory_uri(); ?>/script.js"></script>
 
 <?php get_footer(); ?>
