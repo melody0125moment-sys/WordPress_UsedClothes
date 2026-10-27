@@ -124,3 +124,6 @@ get_header();
 <a href="#" class="page-top-btn">↑ ページ上部に戻る</a>
 
 <?php get_footer(); ?>
+
+<!-- 共通スクリプト -->
+    <script src="<?php echo get_template_directory_uri(); ?>/script.js"></script>
