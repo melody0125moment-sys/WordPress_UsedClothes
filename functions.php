@@ -158,12 +158,18 @@ function save_new_arrival_meta_box($post_id) {
 }
 add_action('save_post', 'save_new_arrival_meta_box');
 
-// 新着入荷商品（new_arrival）のアーカイブページの表示件数を5件にする
+// 新着入荷商品（new_arrival）のアーカイブ表示件数：スマホは6件、PCは5件に切り替える
 function change_new_arrival_posts_per_page($query) {
     if (!is_admin() && $query->is_main_query() && is_post_type_archive('new_arrival')) {
-        $query->set('posts_per_page', 5);
-
-        // 念のため投稿数制限を確実に適用する
+        
+        // スマホ（携帯端末）からのアクセスの場合は「6件」
+        if (wp_is_mobile()) {
+            $query->set('posts_per_page', 6);
+        } else {
+            // PCなどの場合は「5件」
+            $query->set('posts_per_page', 5);
+        }
+        
         $query->set('nopaging', false);
     }
 }

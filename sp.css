@@ -619,7 +619,7 @@ body:has(.global-menu.active) .page-top-btn {
 /* 新着商品一覧　new-arrivals.html*/
 .all-arrivals-section {
     background-color: #e8e8e0;
-    padding: 30px 20px 40px 20px !important;
+    padding: 100px 20px 40px 20px !important;
     /* 上を広めにとって見切れを防止、左右に20pxの余白 */
     width: 100%;
     box-sizing: border-box;
@@ -654,7 +654,6 @@ body:has(.global-menu.active) .page-top-btn {
     margin-top: 0;
     font-size: 12px;
 }
-
 
 .all-arrivals-section .products-grid {
     display: grid;
