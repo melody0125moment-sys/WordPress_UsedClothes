@@ -47,6 +47,7 @@ body {
 .global-menu.active {
     right: 0;
 }
+
 /* メニュー開いてるときはページ上部に戻るボタンを表示しない */
 body:has(.global-menu.active) .page-top-btn {
     display: none !important;
@@ -497,7 +498,7 @@ body:has(.global-menu.active) .page-top-btn {
 .all-pickup-section {
     background-color: #e8e8e0;
     /* 左右の 20px を 「0」 に変更して、幅いっぱいに広げます */
-    padding: 100px 0 40px 0 !important; 
+    padding: 100px 0 40px 0 !important;
     width: 100%;
     box-sizing: border-box;
 }
@@ -585,10 +586,13 @@ body:has(.global-menu.active) .page-top-btn {
     /* 説明文の文字を小さく */
     line-height: 1.4;
 }
+
 /* 抜粋テキスト（pタグ）の下にしっかり余白を開ける */
 .all-pickup-card .card-text p {
-    margin-bottom: 40px ; /* ここの数値を大きくすると隙間が広がります */
+    margin-bottom: 40px;
+    /* ここの数値を大きくすると隙間が広がります */
 }
+
 /* ピックアップ詳細（pickup-1～5） */
 /* スマホ表示時は縦並びにする */
 .pickup-detail-section {
@@ -665,6 +669,13 @@ body:has(.global-menu.active) .page-top-btn {
     /* スナップを解除 */
     gap: 12px;
     /* カード同士の間隔 */
+}
+
+/* スタッフ募集 */
+
+/* スマホ版のとき上に見切れないようパディング（余白）を確保 */
+.recruit-sp-banner-fix {
+    padding-top: 85px;
 }
 
 /* 各カードの幅制限（横スクロール用設定）をリセット */

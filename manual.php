@@ -38,6 +38,16 @@ function add_custom_instruction_meta_boxes()
         'normal',
         'high'
     );
+
+    // 【募集要項（Recruit）用】の操作手順（追加！）
+    add_meta_box(
+        'recruit_instruction_box',
+        '募集要項の編集手順',
+        'render_recruit_instruction_box',
+        'page', // 固定ページ
+        'normal',
+        'high'
+    );
 }
 add_action('add_meta_boxes', 'add_custom_instruction_meta_boxes');
 
@@ -125,6 +135,33 @@ function render_new_arrival_instruction_box()
 
         <p style="margin: 0 0 0 0;"><strong>6. アイキャッチ画像の設定</strong><br>
             - 画面右下の「アイキャッチ画像」より画像を設定します（推奨：200×200px）。</p>
+    </div>
+<?php
+}
+
+// ==========================================
+// メタボックスの中身
+// ==========================================
+function render_recruit_instruction_box($post)
+{
+    // ※スラッグが「recruit」の固定ページでのみこのボックスを表示する条件分岐
+    if ($post->post_name !== 'recruit') {
+        return;
+    }
+?>
+    <div style="font-size: 13px; line-height: 1.6; color: #333;">
+        <p style="margin: 0 0 12px 0; font-weight: 600; color: #333; font-size: 14px;">
+            以下項目のみ変更可能です。以下のテキストボックスより直接編集してください。
+        </p>
+
+        <p style="margin: 0 0 8px 0;"><strong>1. 勤務時間の変更</strong><br>
+            - 「勤務時間」のテキストボックスから、時間やシフトの条件を直接書き換えてください。</p>
+
+        <p style="margin: 0 0 8px 0;"><strong>2. 勤務日数の変更</strong><br>
+            - 「勤務日数」のテキストボックスから、日数の条件を直接書き換えてください。</p>
+
+        <p style="margin: 0 0 0 0;"><strong>3. 給与の変更</strong><br>
+            - 「給与」のテキストボックスから、時給などの金額を直接書き換えてください。</p>
     </div>
 <?php
 }
